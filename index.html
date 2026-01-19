@@ -42,12 +42,15 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
       background-size: 220px 220px;
       mix-blend-mode: overlay;
+      z-index: 0;
     }
 
     .wrap {
       max-width: 900px;
       width: 100%;
       text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
     .badge {
@@ -107,29 +110,30 @@
 
     .coming span {
       display: block;
-      margin-top: 6px;
+      margin-top: 8px;
       font-size: 12px;
       color: var(--muted);
-      letter-spacing: 1.4px;
+      letter-spacing: 0.4px;
       font-weight: 500;
       text-transform: none;
     }
 
     .info {
-      max-width: 720px;
-      margin: 14px auto 0;
+      max-width: 62ch;
+      margin: 16px auto 0;
+      padding: 0 10px;
       color: var(--muted);
       font-size: 15px;
-      line-height: 1.7;
+      line-height: 1.75;
     }
 
     .features {
       list-style: none;
       padding: 0;
       margin: 18px auto 0;
-      max-width: 720px;
+      max-width: 760px;
       display: grid;
-      gap: 10px;
+      gap: 12px;
       text-align: left;
     }
 
@@ -137,10 +141,11 @@
       border: 1px solid rgba(255,255,255,0.12);
       background: rgba(18,18,25,0.45);
       border-radius: 14px;
-      padding: 12px 14px;
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
+      padding: 14px 14px;
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 12px;
+      align-items: start;
     }
 
     .check {
@@ -150,7 +155,6 @@
       border: 1px solid var(--border);
       display: grid;
       place-items: center;
-      flex: 0 0 auto;
       margin-top: 1px;
     }
 
@@ -159,6 +163,20 @@
       height: 14px;
       fill: var(--red);
       filter: drop-shadow(0 0 10px rgba(255,30,30,0.35));
+    }
+
+    .feat-title {
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 4px 0;
+      letter-spacing: 0.2px;
+    }
+
+    .feat-desc {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
     }
 
     .cta {
@@ -172,7 +190,7 @@
     .btn {
       text-decoration: none;
       color: var(--text);
-      padding: 12px 18px;
+      padding: 12px 16px;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,0.15);
       background: rgba(18,18,25,0.55);
@@ -182,6 +200,8 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      cursor: pointer;
+      user-select: none;
     }
 
     .btn:hover {
@@ -196,28 +216,14 @@
       background: linear-gradient(180deg, rgba(255,30,30,0.18), rgba(18,18,25,0.55));
     }
 
+    .btn:active {
+      transform: translateY(0px);
+    }
+
     .btn small {
       color: var(--muted);
       letter-spacing: 0.3px;
       font-size: 12px;
-    }
-
-    .contact {
-      margin-top: 18px;
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .contact a {
-      color: var(--text);
-      text-decoration: none;
-      border-bottom: 1px dashed rgba(255,255,255,0.3);
-    }
-
-    .contact a:hover {
-      color: var(--red);
-      border-bottom-color: var(--red);
     }
 
     .footer {
@@ -225,6 +231,23 @@
       font-size: 12px;
       color: var(--muted);
       opacity: 0.85;
+    }
+
+    @media (max-width: 520px) {
+      .cta {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .btn {
+        justify-content: center;
+        width: 100%;
+      }
+      .features li {
+        padding: 12px 12px;
+      }
     }
   </style>
 </head>
@@ -243,48 +266,68 @@
 
     <div class="coming">
       Android Testers Wanted
-      <span>Currently Android only • Cloud/sync planned later (not in the first release)</span>
+      <span>Android only for now • Cloud/sync planned later (not in the first release)</span>
     </div>
 
     <p class="info">
-      Want to help test the app and give feedback? Send an email and you’ll get the tester access/info.
-      The goal right now is to catch bugs, improve UX, and make the first release solid.
+      Want to help test the app? Send an email and you’ll get the tester access/info.
+      The focus right now is stability, bug-fixing, and polishing the core UX for the first release.
     </p>
 
     <ul class="features">
       <li>
-        <span class="check">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+        <span class="check" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
         </span>
-        <div><strong>Track bike hours</strong><br><span style="color: var(--muted);">Manage multiple bikes and keep hours up to date.</span></div>
+        <div>
+          <p class="feat-title">Track bike hours</p>
+          <p class="feat-desc">Manage multiple bikes and keep operating hours up to date.</p>
+        </div>
       </li>
+
       <li>
-        <span class="check">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+        <span class="check" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
         </span>
-        <div><strong>Service intervals</strong><br><span style="color: var(--muted);">See what’s due next and reset intervals when completed.</span></div>
+        <div>
+          <p class="feat-title">Service intervals</p>
+          <p class="feat-desc">See what’s due next and reset intervals when completed.</p>
+        </div>
       </li>
+
       <li>
-        <span class="check">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+        <span class="check" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
         </span>
-        <div><strong>Service history</strong><br><span style="color: var(--muted);">Log what you did and at which hours.</span></div>
+        <div>
+          <p class="feat-title">Service history</p>
+          <p class="feat-desc">Log what you did and at which hours.</p>
+        </div>
       </li>
+
       <li>
-        <span class="check">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+        <span class="check" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
         </span>
-        <div><strong>Bike setup notes</strong><br><span style="color: var(--muted);">Save suspension/tire pressure notes and tweaks.</span></div>
+        <div>
+          <p class="feat-title">Bike setup notes</p>
+          <p class="feat-desc">Save suspension / tire pressure notes and other tweaks.</p>
+        </div>
       </li>
     </ul>
 
     <div class="cta">
-      <a class="btn primary" href="mailto:fullsendthrottle@gmail.com?subject=FullSendThrottle%20Android%20Tester&body=Hey!%20I%27d%20like%20to%20become%20an%20Android%20tester%20for%20FullSendThrottle.%0A%0ADevice%3A%20%0AAndroid%20version%3A%20%0ACountry%3A%20%0A%0AThanks!">
+      <a
+        class="btn primary"
+        href="mailto:fullsendthrottle@gmail.com?subject=FullSendThrottle%20Android%20Tester&body=Hey!%20I%27d%20like%20to%20become%20an%20Android%20tester%20for%20FullSendThrottle.%0A%0ADevice%3A%20%0AAndroid%20version%3A%20%0ACountry%3A%20%0A%0AThanks!"
+        aria-label="Email to become a tester"
+      >
         Become a Tester <small>(email)</small>
       </a>
-      <a class="btn" href="mailto:fullsendthrottle@gmail.com">
-        fullsendthrottle@gmail.com
-      </a>
+
+      <button class="btn" type="button" id="copyEmailBtn" aria-label="Copy email address">
+        Copy email <small>fullsendthrottle@gmail.com</small>
+      </button>
     </div>
 
     <div class="footer">
@@ -294,6 +337,21 @@
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const email = "fullsendthrottle@gmail.com";
+    const copyBtn = document.getElementById("copyEmailBtn");
+
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+        const original = copyBtn.innerHTML;
+        copyBtn.innerHTML = "Copied! <small>Paste into your email app</small>";
+        setTimeout(() => (copyBtn.innerHTML = original), 1600);
+      } catch (e) {
+        // Fallback: open mail client if clipboard is blocked
+        window.location.href = "mailto:" + email;
+      }
+    });
   </script>
 </body>
 </html>
